@@ -2,7 +2,7 @@ name: nodejs workflow
 on: workflow_dispatch
 jobs:
   job1:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps: 
     - name: clone repo
       uses: actions/checkout@v4.2.2
