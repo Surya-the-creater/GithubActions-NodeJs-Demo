@@ -1,6 +1,6 @@
 name: nodejs_workflow
 on: workflow_dispatch
- jobs:
+jobs:
    jobs1:
      runs-on: ubuntu-latest
      steps: 
@@ -8,9 +8,10 @@ on: workflow_dispatch
          uses:  actions/checkout@v4
        - name: install nodejs
          uses: actions/setup-node@v4
-            with:
-               node-version: 18
-    jobs2:
+         with:
+          node-version: 18
+          cache: 'npm'
+   jobs2:
       runs-on: ubuntu-24.04
       steps:
         - name: Install dependencies
