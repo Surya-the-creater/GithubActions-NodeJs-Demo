@@ -1,27 +1,24 @@
-name: build nodejs Application 
-on: 
- workflow_dispatch:
- push:
-jobs: 
-  job1:
-   continue-on-error: true
-   runs-on: self-hosted
-   steps: 
-    - name: Clone the repo 
-      uses: actions/checkout@v4
-    - name: Install nodejs
-      uses: actions/setup-node@v4
-      with: 
-          node-version: 18
-          cache: 'npm'
-  job2:
-   continue-on-error: true
-   runs-on: ubuntu-latest
-   steps: 
-    - name: Clone the repo 
-      uses: actions/checkout@v4
-    - name: Install nodejs
-      uses: actions/setup-node@v4
-      with: 
-          node-version: 18
-          cache: 'npm'
+name: nodejs_workflow
+on: workflow_dispatch
+ jobs:
+   jobs1:
+     runs-on: ubuntu-latest
+     steps: 
+       - name: checkout cloaning
+         uses:  actions/checkout@v4
+       - name: install nodejs
+         uses: actions/setup-node@v4
+            with:
+               node-version: 18
+    jobs2:
+      runs-on: ubuntu-24.04
+      steps:
+        - name: Install dependencies
+          run: npm ci
+        - name: Executes test cases
+          run: npm test
+        - name: Build the code
+          run: npm run build
+        - name: Deploy the code
+          run: echo 'Deploy the code'
+     
