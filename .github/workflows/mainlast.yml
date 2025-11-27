@@ -1,0 +1,38 @@
+name: nodejs
+
+on:
+  workflow_dispatch:   # Allows manual trigger from GitHub Actions UI
+  push:
+    branches:
+      - master         # Runs when code is pushed to master
+    branches-ignore:
+      - dev            # Ignores pushes to dev
+      - test           # Ignores pushes to test
+  pull_request:
+    branches:
+      - master         # Runs when a PR targets master
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build the code
+        run: npm run build
+
+      - name: Deploy the code
+        run: echo 'Deploy the code'
